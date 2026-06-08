@@ -32,15 +32,16 @@ const snapshot = await getDocs(collection(db, "Phrase"));
 let html = "";
 
 snapshot.forEach(doc => {
-const data = doc.data();
-
+　const data = doc.data();
+　 console.log(data); // ← ★これを追加　06/09
+  
 html += `
 <div style="margin-bottom: 30px; border-bottom: 1px solid #ccc;">
-<p><b>Phr.jP：</b> ${data.phr?.jP}</p>
-<p><b>Phr.en：</b> ${data.phr?.en}</p>
-<p><b>sit.place：</b> ${data.sit?.place}</p>
-<p><b>sit.who：</b> ${data.sit?.who}</p>
-<p><b>kw.arr：</b> ${data.kw?.arr}</p>
+<p><b>Phr.jp：</b> ${data.phr?.jp ?? data["Phr.jp"]}</p>
+<p><b>Phr.en：</b> ${data.phr?.en ?? data["Phr.en"]}</p>
+<p><b>sit.place：</b> ${data.sit?.place ?? data["sit.place"]}</p>
+<p><b>sit.who：</b> ${data.sit?.who ?? data["sit.who"]}</p>
+<p><b>kw.arr：</b> ${data.kw?.arr ?? data["kw.arr"]}</p>
 </div>
 `;
 });
