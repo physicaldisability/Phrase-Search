@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+</head>
+<body>
+
+<h2>Firestore テスト</h2>
+<button onclick="load()">データ取得</button>
+
+<div id="result"></div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyB9YnYdeF9s1BTlcMsgY7rB2TuZ2yqcoCU",
+  authDomain: "phrase-book-pj.firebaseapp.com",
+  projectId: "phrase-book-pj",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.load = async function () {
+
+  const resultArea = document.getElementById("result");
+  resultArea.innerHTML = "読み込み中...";
+
+  const snapshot = await getDocs(collection(db, "Phrase"));
+
+  let html = "";
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+
+    html += `
+      <div style="margin-bottom:20px;">
+        <p>${data["phr.jp"]}</p>
+        <p>${data["phr.en"]}</p>
+      </div>
+    `;
+  });
+
+  resultArea.innerHTML = html;
+};
+
+</script>
+
+</body>
+</html>
