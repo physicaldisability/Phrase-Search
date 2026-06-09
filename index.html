@@ -30,21 +30,31 @@ resultArea.innerHTML = "読み込み中...";
 const snapshot = await getDocs(collection(db, "Phrase"));
 
 let html = "";
-
-snapshot.forEach(doc => {
-　const data = doc.data();
-　 console.log(data); // ← ★これを追加　06/09
   
-html += `
-<div style="margin-bottom: 30px; border-bottom: 1px solid #ccc;">
-<p><b>Phr.jp：</b> ${data.phr?.jp ?? data["Phr.jp"]}</p>
-<p><b>Phr.en：</b> ${data.phr?.en ?? data["Phr.en"]}</p>
-<p><b>sit.place：</b> ${data.sit?.place ?? data["sit.place"]}</p>
-<p><b>sit.who：</b> ${data.sit?.who ?? data["sit.who"]}</p>
-<p><b>kw.arr：</b> ${data.kw?.arr ?? data["kw.arr"]}</p>
-</div>
-`;
+  ↓
+querySnapshot.forEach((doc) => {
+  const data = doc.data();
+
+  const phr_en = data.phr_en || "（なし）";
+  const phr_jp = data.phr_jp || "（なし）";
+  const sit_place = data.sit_place || "（なし）";
+  const sit_who = data.sit_who || "（なし）";
+
+  const kw_arr = Array.isArray(data.kw_arr)
+    ? data.kw_arr.join(" / ")
+    : "（なし）";
+
+  output.innerHTML += `
+    <div>
+      <p>Phr.en: ${phr_en}</p>
+      <p>Phr.jp: ${phr_jp}</p>
+      <p>Sit.place: ${sit_place}</p>
+      <p>Sit.who: ${sit_who}</p>
+      <p>Kw.arr: ${kw_arr}</p>
+    </div>
+  `;
 });
+
 
 resultArea.innerHTML = html;
 };
