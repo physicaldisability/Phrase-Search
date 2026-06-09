@@ -35,7 +35,7 @@ window.load = async function () {
   const output = document.getElementById("result");
 
   // ★②ここだけ変更
-  const querySnapshot = await getDocs(collection(db, "phrase"));
+  const querySnapshot = await getDocs(collection(db, "Phrase"));
 
   let html = "";
 
