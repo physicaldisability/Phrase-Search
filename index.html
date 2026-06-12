@@ -46,10 +46,16 @@ window.load = async function () {
     const phr_jp = data.phr_jp || "（なし）";
     const sit_place = data.sit_place || "（なし）";
     const sit_who = data.sit_who || "（なし）";
+    const sit_who_familiarity = data.sit_familiarity || "（なし）";
+    const sit_who_age_gap = data.sit_who_age_gap || "（なし）";
+    const p_level = data.p_level || "（なし）";
+    const int_lists = data.int_lists || "（なし）";
 
     const kw_arr = Array.isArray(data.kw_arr)
       ? data.kw_arr.join(" / ")
       : "（なし）";
+
+    const phr_f_temp = data.phr_f_temp || "（なし）";
 
     html += `
       <div>
@@ -57,7 +63,12 @@ window.load = async function () {
         <p>Phr.jp: ${phr_jp}</p>
         <p>Sit.place: ${sit_place}</p>
         <p>Sit.who: ${sit_who}</p>
+        <p>Sit.who.familiarityw: ${sit_who_familiarity}</p>
+        <p>Sit.who.age.gap: ${sit_who_age_gap}</p>
+        <p>P.level: ${p_level}</p>
+        <p>Int.lists: ${int_lists}</p>
         <p>Kw.arr: ${kw_arr}</p>
+        <p>Phr.f.temp: ${phr_f_temp}</p>
       </div>
       <hr>
     `;
